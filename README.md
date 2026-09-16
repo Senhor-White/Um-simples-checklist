@@ -137,7 +137,7 @@ Versão 0.2.1 – 16 de Novembro de 2026
 ## Novo visual do Modo Card:
 
 
-![Imagens da nova interface-1](/assets/Aba-MODOcard_v0.2.1)
+![Imagens da nova interface-1](/assets/Aba-MODOcard_v0.2.1.png)
 ---
 🛠️ Correções de Funções
 
