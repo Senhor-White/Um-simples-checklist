@@ -67,7 +67,7 @@ Plano de Ação: O passo a passo detalhado.
 
 Visualização: Seus projetos ficam salvos em cards modernos para fácil consulta.
 
-![Aba Planejamento](assets/Checklist_demo4.png)
+![Aba Planejamento](assets/Aba-planejamento.png)
 
 🎨 6. Personalização (Temas e Abas)
 Deixe o painel com a sua cara.
@@ -77,8 +77,6 @@ Temas: No menu lateral, você pode alterar as cores primárias, de destaque e de
 Criar Abas: Precisa de um espaço para anotações extras? Use a função "Criar Aba" para adicionar seções personalizadas ao seu menu.
 
 ![Aba Personalização](assets/Checklist_demo6.png)
-
-![Aba Extra](assets/Checklist_demo5.png)
 
 💾 7. Segurança e Backup
 Seus dados são salvos localmente no seu navegador, mas você pode garantir que nunca os perderá:
