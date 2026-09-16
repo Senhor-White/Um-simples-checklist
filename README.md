@@ -1,4 +1,4 @@
-<img width="1918" height="877" alt="image" src="https://github.com/user-attachments/assets/ec747eea-21bb-4526-a106-600e3ed4a3e0" />🚀 Demo online:
+🚀 Demo online:
 [https://senhor-white.github.io/Um-simples-checklist/](https://senhor-white.github.io/Um-simples-checklist/)
 
 💾 Os dados são salvos no navegador (localStorage).
