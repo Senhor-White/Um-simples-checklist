@@ -120,7 +120,7 @@ Todas as funcionalidades existentes foram preservadas sem qualquer alteração.
 
 ---
 
-Versão 0.2.1 – Março de 2026
+Versão 0.2.1 – 16 de Novembro de 2026
 
 📱 Correções Visuais para Dispositivos Móveis
 
