@@ -25,7 +25,7 @@ Finalizar Dia: Ao completar as tarefas, clique no botão para salvar o dia no se
 
 Rotina Mínima: Use o ícone de folha (🍃) para dias mais leves onde você quer focar apenas no essencial.
 
-![Aba checklist](assets/Checklist_demo1.png)
+![Aba checklist](assets/Aba-Principal_v0.2.1.png)
 
 📜 2. Histórico e Filtros
 Acompanhe seu desempenho passado e veja onde você teve sucesso ou falhas.
@@ -35,6 +35,8 @@ Status: O sistema registra dias como ✅ (Completos) ou ⚠️ (Incompletos).
 Justificativa: Se você não completar um dia, o sistema pedirá uma justificativa. Isso ajuda a entender padrões de falha.
 
 Filtros: Use os botões de filtro no topo para ver apenas os dias que deseja analisar.
+
+![Aba reflexão](assets/Checklist_demo3.png)
 
 🧠 3. Reflexão (Análise de Erros)
 Transforme falhas em aprendizado. Use esta aba sempre que algo não sair como planejado.
