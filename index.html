@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartCheck • Painel de Evolução & Checklist</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- ========================================
+       HUD / MENU LATERAL
+       ======================================== -->
+  <button class="hud-toggle" onclick="window.toggleHUD()" title="Abrir Menu">☰</button>
+  <div class="hud-overlay" onclick="window.toggleHUD()"></div>
+
+  <nav class="hud-menu" id="hudMenu">
+    <div class="hud-section">
+      <div class="hud-section-title">⚡ Navegação</div>
+      <div class="hud-item" onclick="window.showView('checklist')">📋 Checklist Semanal</div>
+      <div class="hud-item" onclick="window.startCardsMode(); window.toggleHUD();">🎴 Modo Cards do Dia</div>
+      <div class="hud-item" onclick="window.showView('manage-tasks')">📝 Gerenciar Tarefas & Blocos</div>
+      <div class="hud-item" onclick="window.showView('history')">📜 Histórico</div>
+      <div class="hud-item" onclick="window.showView('reflection')">🧠 Reflexão (Erros)</div>
+      <div class="hud-item" onclick="window.showView('habits')">🌱 Hábitos</div>
+      <div class="hud-item" onclick="window.showView('planning')">🎯 Planejamento</div>
+      <div class="hud-item" onclick="window.showView('themes')">🎨 Temas & Cores</div>
+      <div class="hud-item" onclick="window.showView('create-tab')">➕ Criar Nova Aba</div>
+    </div>
+
+    <div class="hud-section">
+      <div class="hud-section-title">💾 Backup & Sincronização</div>
+      <div class="hud-item" onclick="window.exportToMarkdown()">💾 Salvar Backup (.md)</div>
+      <div class="hud-item" onclick="window.triggerImport()">📂 Importar Backup (.md)</div>
+      <input type="file" id="importFileInput" accept=".md" style="display: none;" onchange="window.importFromMarkdown(this)">
+      <div class="hud-item" onclick="window.setupAutoSave()" id="btnAutoSave" style="color: #ef4444;">🔴 Conectar Auto-Save</div>
+    </div>
+
+    <div class="hud-section" id="customTabsSection" style="display: none;">
+      <div class="hud-section-title">📌 Minhas Abas</div>
+      <div id="customTabsList"></div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>⚡ SmartCheck</h1>
+      <div class="current-date" id="currentDate"></div>
+    </header>
+
+    <div class="nav-buttons">
+      <button class="btn btn-primary" onclick="window.showView('checklist')">📋 Checklist</button>
+      <button class="btn btn-outline-neon" onclick="window.startCardsMode()">🎴 Modo Cards</button>
+      <button class="btn btn-outline-neon" onclick="window.showView('manage-tasks')">📝 Gerenciar Blocos</button>
+      <button class="btn btn-outline-neon" onclick="window.showView('history')">📜 Histórico</button>
+      <button class="btn btn-outline-neon" onclick="window.showView('reflection')">🧠 Reflexão</button>
+      <button class="btn btn-outline-neon" onclick="window.showView('habits')">🌱 Hábitos</button>
+      <button class="btn btn-outline-neon" onclick="window.showView('planning')">🎯 Metas</button>
+      <button class="btn btn-danger btn-reset-day" onclick="window.resetChecklist()">🔄 Resetar Dia</button>
+    </div>
+
+    <!-- ========================================
+         VIEW: CHECKLIST SEMANAL
+         ======================================== -->
+    <div id="checklist" class="view active">
+      <div id="weekContainer"></div>
+    </div>
+
+    <!-- ========================================
+         VIEW: MODO CARDS DO DIA
+         ======================================== -->
+    <div id="cards-view" class="view cards-mode-view">
+      <div id="cardsModeContent" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
+      <button class="btn-back-mode" onclick="window.showView('checklist')">🔙 Voltar para Checklist Padrão</button>
+    </div>
+
+    <!-- ========================================
+         VIEW: GERENCIAR TAREFAS & BLOCOS
+         ======================================== -->
+    <div id="manage-tasks" class="view">
+      <div class="day-card task-manager-top-card">
+        <h2 style="margin-bottom: 18px; color: #ffffff;">📝 Gerenciar Tarefas & Blocos Categorizados</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 16px;">
+          <div class="input-group" style="margin-bottom: 0;">
+            <label>1. Selecione o Dia</label>
+            <select id="taskDaySelect" class="styled-input">
+              <option value="Segunda-feira">Segunda-feira</option>
+              <option value="Terça-feira">Terça-feira</option>
+              <option value="Quarta-feira">Quarta-feira</option>
+              <option value="Quinta-feira">Quinta-feira</option>
+              <option value="Sexta-feira">Sexta-feira</option>
+              <option value="Sábado">Sábado</option>
+              <option value="Domingo">Domingo</option>
+            </select>
+          </div>
+
+          <div class="input-group" style="margin-bottom: 0;">
+            <label>2. Bloco / Categoria</label>
+            <div style="display: flex; gap: 8px;">
+              <select id="taskCategorySelect" class="styled-input" style="flex: 1;"></select>
+              <button class="btn btn-outline-neon" onclick="window.promptNewCategory()" title="Criar nova categoria/bloco">+ Bloco</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group" style="margin-bottom: 0;">
+          <label>3. Descrição da Tarefa</label>
+          <div class="add-task-input-row" style="display: flex; gap: 10px;">
+            <input type="text" id="newTaskInput" class="styled-input" placeholder="Ex: Estudar Gramática das 14h às 15h..."
+              style="margin-bottom: 0;" onkeydown="if(event.key==='Enter') window.addNewTask()">
+            <button class="btn btn-primary" onclick="window.addNewTask()">Adicionar Tarefa</button>
+          </div>
+        </div>
+
+        <!-- Lista de Blocos com Drag-and-Drop -->
+        <div id="taskManagementList" style="margin-top: 24px;"></div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         VIEW: HISTÓRICO
+         ======================================== -->
+    <div id="history" class="view">
+      <div class="filter-buttons">
+        <button class="filter-btn active" onclick="window.filterHistory('all')">Todos</button>
+        <button class="filter-btn" onclick="window.filterHistory('completed')">✅ Concluídos</button>
+        <button class="filter-btn" onclick="window.filterHistory('incomplete')">⚠️ Incompletos</button>
+      </div>
+      <div id="historyContainer" class="history-grid"></div>
+    </div>
+
+    <!-- ========================================
+         VIEW: REFLEXÃO DE ERROS
+         ======================================== -->
+    <div id="reflection" class="view">
+      <div class="day-card">
+        <h2 style="margin-bottom: 20px; color: #ffffff;">🛡️ Análise de Erros & Aprendizados</h2>
+        <div class="input-group">
+          <label>Qual foi o erro ou desvio?</label>
+          <input type="text" id="errorTitle" class="styled-input" placeholder="Ex: Procrastinei no celular durante o bloco de estudos">
+        </div>
+        <div class="input-group">
+          <label>Por que isso aconteceu? (A Causa Raiz)</label>
+          <textarea id="errorCause" class="styled-textarea"
+            placeholder="Ex: Não deixei o aparelho longe e ativei notificações..."></textarea>
+        </div>
+        <div class="input-group">
+          <label>Plano de Correção (O Caminho Prático)</label>
+          <input type="text" id="errorFix" class="styled-input"
+            placeholder="Ex: Deixar o celular em outro cômodo e usar modo foco no PC">
+        </div>
+        <button class="btn btn-primary" onclick="window.addError()" style="width: 100%; justify-content: center; padding: 14px;">
+          Registrar Aprendizado
+        </button>
+      </div>
+      <div id="errorList" class="error-grid"></div>
+    </div>
+
+    <!-- ========================================
+         VIEW: HÁBITOS
+         ======================================== -->
+    <div id="habits" class="view">
+      <div class="day-card">
+        <h2 style="margin-bottom: 20px; color: #ffffff;">🌱 Gestão de Hábitos</h2>
+        <div class="habit-add-row" style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px; flex-wrap: wrap;">
+          <input type="text" id="habitInput" class="styled-input" style="flex: 1; min-width: 180px; margin-bottom: 0;"
+            placeholder="Novo hábito (ex: Beber 3L de água, Acordar às 06h)..." onkeydown="if(event.key==='Enter') window.addHabit()">
+          <select id="habitType" class="styled-input" style="width: 150px; margin-bottom: 0;">
+            <option value="good">Construir 👍</option>
+            <option value="bad">Destruir 👎</option>
+          </select>
+          <button class="btn btn-primary" onclick="window.addHabit()">Adicionar</button>
+        </div>
+      </div>
+
+      <div class="habits-container">
+        <div class="habit-column">
+          <h2>✨ Construindo (Bons)</h2>
+          <div id="goodHabitsList"></div>
+        </div>
+        <div class="habit-column">
+          <h2>👹 Eliminando (Maus)</h2>
+          <div id="badHabitsList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         VIEW: PLANEJAMENTO & METAS
+         ======================================== -->
+    <div id="planning" class="view">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="color: #ffffff;">🎯 Meus Projetos & Metas</h2>
+        <button class="btn btn-primary toggle-form-btn" onclick="window.togglePlanningForm()">➕ Novo Planejamento</button>
+      </div>
+
+      <div id="planningForm" class="day-card" style="display: none; margin-bottom: 24px;">
+        <h3 style="margin-bottom: 18px; color: #ffffff;">🎯 Cadastrar Novo Objetivo</h3>
+
+        <div class="input-group">
+          <label>Título do Projeto / Meta</label>
+          <input type="text" id="planTitle" class="styled-input" placeholder="Ex: Aprovação no Concurso / Fluência em Inglês">
+        </div>
+
+        <div class="input-group">
+          <label>Objetivo Principal (Onde quero chegar)</label>
+          <input type="text" id="mainGoal" class="styled-input"
+            placeholder="Ex: Atingir 90% de acertos em simulados e consolidar o cronograma">
+        </div>
+
+        <div class="input-group">
+          <label>Plano de Ação (Etapas e Passo a Passo)</label>
+          <textarea id="actionPlan" class="styled-textarea" style="height: 160px;"
+            placeholder="1. Revisar teoria por blocos de questões&#10;2. Simulado semanal todo sábado&#10;3. Análise de erros pós-teste"></textarea>
+        </div>
+
+        <div class="form-actions-row" style="display: flex; gap: 10px;">
+          <button class="btn btn-danger" onclick="window.togglePlanningForm()" style="flex: 1;">Cancelar</button>
+          <button class="btn btn-primary" onclick="window.addPlan()" style="flex: 2;">💾 Salvar Planejamento</button>
+        </div>
+      </div>
+
+      <div id="planningList" class="planning-grid"></div>
+    </div>
+
+    <!-- ========================================
+         VIEW: CRIAR ABA PERSONALIZADA
+         ======================================== -->
+    <div id="create-tab" class="view">
+      <div class="day-card">
+        <h2 style="margin-bottom: 20px; color: #ffffff;">➕ Criar Nova Aba Customizada</h2>
+
+        <div class="input-group">
+          <label>📌 Título da Aba</label>
+          <input type="text" id="newTabTitle" class="styled-input" placeholder="Ex: Minhas Anotações de Estudo">
+        </div>
+
+        <div class="input-group">
+          <label>📝 Conteúdo</label>
+          <textarea id="newTabContent" class="styled-textarea" style="height: 240px;"
+            placeholder="Digite aqui anotações, links úteis, lembretes fixos..."></textarea>
+        </div>
+
+        <div class="form-actions-row" style="display: flex; gap: 10px;">
+          <button class="btn btn-danger" onclick="window.clearTabForm()" style="flex: 1;">🗑️ Limpar</button>
+          <button class="btn btn-primary" onclick="window.createCustomTab()" style="flex: 2;">✅ Criar Aba</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         VIEW: TEMAS
+         ======================================== -->
+    <div id="themes" class="view">
+      <div class="day-card">
+        <h2 style="margin-bottom: 20px; color: #ffffff;">🎨 Personalizar Paleta</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+          <div class="input-group">
+            <label>Cor Primária</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="color" id="primaryColorPicker" value="#ffffff" style="width: 48px; height: 42px; border: none; border-radius: 6px; cursor: pointer;">
+              <input type="text" id="primaryColorInput" class="styled-input" value="#ffffff">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Cor de Destaque</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="color" id="accentColorPicker" value="#ffffff" style="width: 48px; height: 42px; border: none; border-radius: 6px; cursor: pointer;">
+              <input type="text" id="accentColorInput" class="styled-input" value="#ffffff">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Cor de Fundo</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="color" id="bgColorPicker" value="#000000" style="width: 48px; height: 42px; border: none; border-radius: 6px; cursor: pointer;">
+              <input type="text" id="bgColorInput" class="styled-input" value="#000000">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Cor do Texto</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="color" id="textColorPicker" value="#ffffff" style="width: 48px; height: 42px; border: none; border-radius: 6px; cursor: pointer;">
+              <input type="text" id="textColorInput" class="styled-input" value="#ffffff">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions-row" style="display: flex; gap: 10px; margin-top: 20px;">
+          <button class="btn btn-outline-neon" onclick="window.resetTheme()" style="flex: 1;">♻️ Restaurar Neon White</button>
+          <button class="btn btn-primary" onclick="window.saveTheme()" style="flex: 2;">💾 Salvar Paleta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       MODAL: JUSTIFICATIVA DE DIA INCOMPLETO
+       ======================================== -->
+  <div id="justificationModal" class="modal">
+    <div class="modal-content">
+      <div style="font-size: 1.35rem; font-weight: 700; margin-bottom: 14px; color: #ffffff;">⚠️ Dia Incompleto</div>
+      <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem;">
+        Nem todas as tarefas foram marcadas. Insira uma breve justificativa para registrar no histórico:
+      </p>
+      <textarea id="justificationText" class="styled-textarea" placeholder="Motivo do dia incompleto..."></textarea>
+      <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px;">
+        <button class="btn btn-danger" onclick="window.closeModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="window.saveWithJustification()">Salvar Registro</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================
+       MODAL: ALTERNAR ROTINA MÍNIMA
+       ======================================== -->
+  <div id="routineModal" class="modal">
+    <div class="routine-modal-content">
+      <div id="routineModalIcon" style="font-size: 3rem; margin-bottom: 15px;">🍃</div>
+      <div id="routineModalTitle" class="routine-modal-title">Deseja ativar a rotina mínima para hoje?</div>
+      <div class="routine-modal-actions">
+        <button class="routine-btn-no" onclick="window.closeRoutineModal()">Não</button>
+        <button class="routine-btn-yes" onclick="window.confirmRoutineChange()">Sim</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUD END DO MODO CARDS -->
+  <div id="hudEndMode">
+    <div class="hud-end-content">
+      <h2>🎉 Parabéns!</h2>
+      <p>Todos os cards de hoje foram concluídos com sucesso. Mantenha a disciplina e o foco!</p>
+      <button class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 1.1rem; padding: 14px;"
+        onclick="window.closeAndResetCardsMode()">Fechar e Concluir</button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS MODULARES (CARREGAMENTO UNIVERSAL FILE:// & HTTP) -->
+  <script src="js/state.js"></script>
+  <script src="js/dragDrop.js"></script>
+  <script src="js/taskManager.js"></script>
+  <script src="js/checklist.js"></script>
+  <script src="js/cardsMode.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/habits.js"></script>
+  <script src="js/reflection.js"></script>
+  <script src="js/planning.js"></script>
+  <script src="js/customTabs.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
