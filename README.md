@@ -76,8 +76,6 @@ Deixe o painel com a sua cara.
 
 Temas: No menu lateral, você pode alterar as cores primárias, de destaque e de fundo.
 
-Criar Abas: Precisa de um espaço para anotações extras? Use a função "Criar Aba" para adicionar seções personalizadas ao seu menu.
-
 ![Aba Personalização](assets/Aba-custom.png)
 
 💾 7. Segurança e Backup
@@ -86,6 +84,8 @@ Seus dados são salvos localmente no seu navegador, mas você pode garantir que 
 Salvar Backup (.md): Exporta todos os seus dados para um arquivo de texto.
 
 Auto-Save: Conecte o sistema a um arquivo no seu computador para que ele salve automaticamente cada alteração (disponível em navegadores modernos).
+
+Criar Abas: Precisa de um espaço para anotações extras? Use a função "Criar Aba" para adicionar seções personalizadas ao seu menu.
 
 ![Aba Segurança e Backup ](assets/Aba-Smartcheck_v.0.2.1.png)
 
