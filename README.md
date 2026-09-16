@@ -36,7 +36,7 @@ Justificativa: Se você não completar um dia, o sistema pedirá uma justificati
 
 Filtros: Use os botões de filtro no topo para ver apenas os dias que deseja analisar.
 
-![Aba reflexão](assets/Checklist_demo3.png)
+![Aba histórico](assets/Aba-historico_v0.2.1.png)
 
 🧠 3. Reflexão (Análise de Erros)
 Transforme falhas em aprendizado. Use esta aba sempre que algo não sair como planejado.
@@ -47,12 +47,12 @@ A Causa: Identifique o motivo real (ex: cansaço, distração).
 
 O Caminho: Defina uma ação prática para que o erro não se repita.
 
-![Aba reflexão](assets/Checklist_demo3.png)
+![Aba reflexão](assets/Aba-reflexao_v0.2.1.png)
 
 🌱 4. Gestão de Hábitos
 Dividido entre bons hábitos que você quer Construir e maus hábitos que quer Destruir.
 
-![Aba Hábitos](assets/Checklist_demo7.png)
+![Aba Hábitos](assets/Aba-habitos_v0.21.png)
 
 Bons: Liste hábitos positivos (ex: Meditar, Ler).
 
