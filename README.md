@@ -1,4 +1,4 @@
-🚀 Demo online:
+<img width="1918" height="877" alt="image" src="https://github.com/user-attachments/assets/ec747eea-21bb-4526-a106-600e3ed4a3e0" />🚀 Demo online:
 [https://senhor-white.github.io/Um-simples-checklist/](https://senhor-white.github.io/Um-simples-checklist/)
 
 💾 Os dados são salvos no navegador (localStorage).
@@ -76,7 +76,7 @@ Temas: No menu lateral, você pode alterar as cores primárias, de destaque e de
 
 Criar Abas: Precisa de um espaço para anotações extras? Use a função "Criar Aba" para adicionar seções personalizadas ao seu menu.
 
-![Aba Personalização](assets/Checklist_demo6.png)
+![Aba Personalização](assets/Aba-custom.png)
 
 💾 7. Segurança e Backup
 Seus dados são salvos localmente no seu navegador, mas você pode garantir que nunca os perderá:
@@ -85,7 +85,7 @@ Salvar Backup (.md): Exporta todos os seus dados para um arquivo de texto.
 
 Auto-Save: Conecte o sistema a um arquivo no seu computador para que ele salve automaticamente cada alteração (disponível em navegadores modernos).
 
-![Aba Segurança e Backup ](assets/Checklist_demo5.png)
+![Aba Segurança e Backup ](assets/Aba-Smartcheck_v.0.2.1.png)
 
 💡 Dica de Ouro:
 
@@ -133,7 +133,12 @@ Versão 0.2.1 – 16 de Novembro de 2026
 * Redesign visual refinado mantendo a identidade do projeto.
 * Melhorias na hierarquia visual, tipografia e detalhes de acabamento na interface.
 * Transições e efeitos visuais mais suaves durante a navegação.
+---
+## Novo visual do Modo Card:
 
+
+![Imagens da nova interface-1](/assets/Aba-MODOcard_v0.2.1)
+---
 🛠️ Correções de Funções
 
 * Ajuste de bugs pontuais no fluxo de criação e marcação de tarefas.
