@@ -1,10 +1,10 @@
-
 🚀 Demo online:
-https://senhor-white.github.io/Um-simples-checklist/
+[https://senhor-white.github.io/Um-simples-checklist/](https://www.google.com/search?q=https://senhor-white.github.io/Um-simples-checklist/)
 
 💾 Os dados são salvos no navegador (localStorage).
 
 ## Teste rápido (1 minuto)
+
 1. Abra o link da demo
 2. Crie 2 tarefas no checklist
 3. Marque uma como concluída
@@ -36,8 +36,6 @@ Justificativa: Se você não completar um dia, o sistema pedirá uma justificati
 
 Filtros: Use os botões de filtro no topo para ver apenas os dias que deseja analisar.
 
-![Aba histórico](assets/Checklist_demo2.png)
-
 🧠 3. Reflexão (Análise de Erros)
 Transforme falhas em aprendizado. Use esta aba sempre que algo não sair como planejado.
 
@@ -51,12 +49,12 @@ O Caminho: Defina uma ação prática para que o erro não se repita.
 
 🌱 4. Gestão de Hábitos
 Dividido entre bons hábitos que você quer Construir e maus hábitos que quer Destruir.
+
 ![Aba Hábitos](assets/Checklist_demo7.png)
+
 Bons: Liste hábitos positivos (ex: Meditar, Ler).
 
 Maus: Registre o que quer eliminar. Quando conseguir vencer um vício ou mau hábito, use o botão para "Destruí-lo" e registrar a data da vitória.
-
-
 
 🎯 5. Planejamento de Projetos
 Para objetivos de longo prazo que exigem mais do que um simples checklist.
@@ -72,11 +70,11 @@ Visualização: Seus projetos ficam salvos em cards modernos para fácil consult
 🎨 6. Personalização (Temas e Abas)
 Deixe o painel com a sua cara.
 
-![Aba Personalização](assets/Checklist_demo6.png)
-
 Temas: No menu lateral, você pode alterar as cores primárias, de destaque e de fundo.
 
 Criar Abas: Precisa de um espaço para anotações extras? Use a função "Criar Aba" para adicionar seções personalizadas ao seu menu.
+
+![Aba Personalização](assets/Checklist_demo6.png)
 
 ![Aba Extra](assets/Checklist_demo5.png)
 
@@ -93,17 +91,8 @@ Auto-Save: Conecte o sistema a um arquivo no seu computador para que ele salve a
 
 O SmartCheck funciona 100% offline. Você pode baixar o arquivo HTML e usá-lo em qualquer lugar, mesmo sem internet.
 
-
-
-
-
-
-
-
-
-
 Log de Atualizações
-Versão 2.0 – 26 de fevereiro de 2026
+Versão 0.2.0 – 26 de fevereiro de 2026
 Funcionalidades adicionadas:
 
 Animação de entrada
@@ -127,15 +116,31 @@ Imagens:
 
 ![Aba card_2](assets/Checklist_demo9.png)
 
-
-
-
 Todas as funcionalidades existentes foram preservadas sem qualquer alteração.
 
+---
 
+Versão 0.2.1 – Março de 2026
 
+📱 Correções Visuais para Dispositivos Móveis
 
+* Ajustes de responsividade em telas pequenas e smartphones.
+* Correção de alinhamento em menus, modais e elementos sobrepostos no mobile.
+* Espaçamentos e áreas de toque otimizados para navegação mobile.
 
+✨ Novo Visual
 
+* Redesign visual refinado mantendo a identidade do projeto.
+* Melhorias na hierarquia visual, tipografia e detalhes de acabamento na interface.
+* Transições e efeitos visuais mais suaves durante a navegação.
 
+🛠️ Correções de Funções
 
+* Ajuste de bugs pontuais no fluxo de criação e marcação de tarefas.
+* Melhorias na estabilidade da persistência dos dados no localStorage.
+* Correções na sincronização dos filtros do histórico e das abas personalizadas.
+
+⚡ Otimização
+
+* Limpeza e refatoração do código (CSS e JS) para melhor desempenho.
+* Redução no tempo de resposta das interações e carregamento mais ágil.
