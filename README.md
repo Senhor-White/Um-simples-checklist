@@ -23,7 +23,7 @@ Como usar: Marque os itens conforme os conclui. A barra de progresso no topo do 
 
 Finalizar Dia: Ao completar as tarefas, clique no botão para salvar o dia no seu histórico.
 
-Rotina Mínima: Use o ícone de folha (🍃) para dias mais leves onde você quer focar apenas no essencial.
+Rotina Mínima: Use o ![](/assets/Imagem-button-little.png) para dias mais leves onde você quer focar apenas no essencial.
 
 ![Aba checklist](assets/Aba-Principal_v0.2.1.png)
 
